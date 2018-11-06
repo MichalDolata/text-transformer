@@ -16,11 +16,31 @@ public class TextTransformer {
         return text.toUpperCase();
     }
     static String Upper(String text)
-	{	
-		return text.toUpperCase();
+    {
+	 return text.toUpperCase();
+    }
+    static String Lower(String text)
+    {	
+         return text.toLowerCase();
+    }
+    static String Capital(String text)
+    {
+          char lit[] = text.toCharArray();
+	  boolean cap = true;
+	  for (int i = 0; i < text.length(); i++)
+	  {
+	        if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
+		{
+		      cap = true;
+		}
+		else if ((cap)&&(lit[i] != ' '))
+		{
+			if((lit[i] >= 97) && (lit[i] <= 122))
+			      lit[i]-=32;
+			cap = false;
+		}
+	   }
+	   return String.valueOf(lit);
 	}
-	static String Lower(String text)
-	{	
-		return text.toLowerCase();
-	}
+	
 }
