@@ -15,4 +15,12 @@ public class TextTransformer {
         // of course normally it would to something based on transforms
         return text.toUpperCase();
     }
+    static String Upper(String text)
+	{	
+		return text.toUpperCase();
+	}
+	static String Lower(String text)
+	{	
+		return text.toLowerCase();
+	}
 }
