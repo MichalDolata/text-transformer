@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ *@author Ievgenii_Bogdanov
+ *@author Łukasz_Eckert
+ *@author Michał_Dolata
+ *@author Michał_Dziardziel
  * This is just an example to show that the logic should be outside the REST service.
  */
 public class TextTransformer {
@@ -18,17 +22,30 @@ public class TextTransformer {
         // of course normally it would to something based on transforms
         return text.toUpperCase();
     }
-    //Upper Transformation
+    /**
+     * This function is used for transformation all letters to upper case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in upper case
+     */
     static String Upper(String text)
     {
 	 return text.toUpperCase();
     }
-    //Lower Transformation
+    /**
+     * This function is used for transformation all letters to lower case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in lower case
+     */
     static String Lower(String text)
     {	
          return text.toLowerCase();
     }
-    //Capitalize Transformation
+    
+    /**
+     * This function is used for transformation onle the first letter in each sentence to upper case.
+     * @param text - Input string that will be changed
+     * @return string where onle the first letter in each sentence in upper case
+     */
     static String Capital(String text)
     {
           char lit[] = text.toCharArray();
