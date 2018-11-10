@@ -45,7 +45,7 @@ public class TextTransformer {
         for (Map.Entry<String, String> entry : map.entrySet())
         {
             String temp = str.toLowerCase();
-            str = str.replaceAll(""+entry.getKey(),entry.getValue());
+            str = str.replaceAll("\\b"+entry.getKey()+"\\b",entry.getValue());
         }
         return str;
     }
@@ -74,6 +74,7 @@ public class TextTransformer {
     private String transformLatext(String str){
         return replaceWithMap(str,LATEXT_MAP);
     }
+
     /**
      * Map used to replace abbreviation to long forms.
      */
@@ -91,10 +92,48 @@ public class TextTransformer {
           put("M.in", "Między innymi");
       }}
     );
+
+    /**
+     * Transform all abbreviations inside ABBREVIATION_TO_WORDS_MAPS to their longer form
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
     private String transformAbbreviationToWords(String str)
     {
         return replaceWithMap(str, ABBREVIATION_TO_WORDS_MAP);
     }
+
+    /**
+     * Map used to replace sequence of words to corresponding abbreviation
+     */
+    private static final Map<String,String> WORDS_TO_ABBREVIATION_MAP = Collections.unmodifiableMap(
+            new HashMap<String,String>(){{
+                put("profesor","prof.");
+                put("Profesor","Prof.");
+                put("doktor", "dr");
+                put("Doktor", "Dr");
+                put("na przykład", "np.");
+                put("Na przykład", "Np.");
+                put("i tym podobne", "itd.");
+                put("I tym podobne", "Itd.");
+                put("między innymi", "m.in");
+                put("Między innymi", "M.in");
+            }}
+    );
+
+    /**
+     * Transform some sequence of words that corresponds to element of WORDS_TO_ABBREVIATION_MAPS to abbreviation
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
+    private String transformWordsToAbbreviation(String str)
+    {
+        return replaceWithMap(str, WORDS_TO_ABBREVIATION_MAP);
+    }
+
+
+
+
 
 
 }
