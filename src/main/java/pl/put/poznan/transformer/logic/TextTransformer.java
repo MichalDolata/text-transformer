@@ -1,5 +1,6 @@
 package pl.put.poznan.transformer.logic;
 
+
 import javax.validation.constraints.Null;
 import java.util.*;
 
@@ -43,13 +44,14 @@ public class TextTransformer {
     private String replaceWithMap(String str, Map<String,String> map) {
         for (Map.Entry<String, String> entry : map.entrySet())
         {
-            str = str.replace(entry.getKey(),entry.getValue());
+            String temp = str.toLowerCase();
+            str = str.replaceAll(""+entry.getKey(),entry.getValue());
         }
         return str;
     }
 
     /**
-     * Map that is used to replace special LaText characters.
+     * Map used to replace special LaText characters.
      */
     private static final Map<String,String> LATEXT_MAP= Collections.unmodifiableMap(
             new HashMap<String,String>() {{
@@ -71,6 +73,27 @@ public class TextTransformer {
      */
     private String transformLatext(String str){
         return replaceWithMap(str,LATEXT_MAP);
+    }
+    /**
+     * Map used to replace abbreviation to long forms.
+     */
+    private static final Map<String,String> ABBREVIATION_TO_WORDS_MAP = Collections.unmodifiableMap(
+      new HashMap<String,String>(){{
+          put("prof.", "profesor");
+          put("Prof.", "Profesor");
+          put("dr", "doktor");
+          put("Dr", "Doktor");
+          put("np.", "na przykład");
+          put("Np.", "Na przykład");
+          put("itd.", "i tym podobne");
+          put("Itd.", "I tym podobne");
+          put("m.in", "między innymi");
+          put("M.in", "Między innymi");
+      }}
+    );
+    private String transformAbbreviationToWords(String str)
+    {
+        return replaceWithMap(str, ABBREVIATION_TO_WORDS_MAP);
     }
 
 
