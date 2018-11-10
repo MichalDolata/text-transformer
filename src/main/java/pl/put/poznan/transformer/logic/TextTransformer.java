@@ -1,7 +1,7 @@
 package pl.put.poznan.transformer.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.validation.constraints.Null;
+import java.util.*;
 
 /**
  * This is just an example to show that the logic should be outside the REST service.
@@ -39,4 +39,39 @@ public class TextTransformer {
         }
         return String.join(" ", words);
     }
+
+    private String replaceWithMap(String str, Map<String,String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet())
+        {
+            str = str.replace(entry.getKey(),entry.getValue());
+        }
+        return str;
+    }
+
+    /**
+     * Map that is used to replace special LaText characters.
+     */
+    private static final Map<String,String> LATEXT_MAP= Collections.unmodifiableMap(
+            new HashMap<String,String>() {{
+                put("%","\\%");
+                put("$","\\$");
+                put("{","\\{");
+                put("}","\\}");
+                put("_","\\_");
+                put("|","\\textbar");
+                put(">","\\textgreater");
+                put("<","\\textbackslash");
+                put("&","\\&");
+            }});
+
+    /**
+     * Returns text that can be safely used in LaText environment.
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
+    private String transformLatext(String str){
+        return replaceWithMap(str,LATEXT_MAP);
+    }
+
+
 }
