@@ -46,11 +46,11 @@ public class TextTransformer {
      */
     static String capital(String text)
     {
-          char lit[] = text.toCharArray();
-	  boolean cap = true;
-	  for (int i = 0; i < text.length(); i++)
-	  {
-	        if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
+    	char lit[] = text.toCharArray();
+	boolean cap = true;
+	for (int i = 0; i < text.length(); i++)
+	{
+		if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
 		{
 		      cap = true;
 		}
@@ -60,8 +60,8 @@ public class TextTransformer {
 			      lit[i]-=32;
 			cap = false;
 		}
-	   }
-	   return String.valueOf(lit);
+	}
+	return String.valueOf(lit);
     }
 
     private String removeRepetitions(String sentence){
