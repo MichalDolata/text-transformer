@@ -18,6 +18,51 @@ public class TextTransformer {
         // of course normally it would to something based on transforms
         return text.toUpperCase();
     }
+    
+    /**
+     * This function is used for transformation all letters to upper case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in upper case
+     */
+    static String upper(String text)
+    {
+	 return text.toUpperCase();
+    }
+
+    /**
+     * This function is used for transformation all letters to lower case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in lower case
+     */
+    static String lower(String text)
+    {	
+         return text.toLowerCase();
+    }
+	
+    /**
+     * This function is used for transformation onle the first letter in each sentence to upper case.
+     * @param text - Input string that will be changed
+     * @return string where onle the first letter in each sentence in upper case
+     */
+    static String capital(String text)
+    {
+    	char lit[] = text.toCharArray();
+	boolean cap = true;
+	for (int i = 0; i < text.length(); i++)
+	{
+		if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
+		{
+		      cap = true;
+		}
+		else if ((cap)&&(lit[i] != ' '))
+		{
+			if((lit[i] >= 97) && (lit[i] <= 122))
+			      lit[i]-=32;
+			cap = false;
+		}
+	}
+	return String.valueOf(lit);
+    }
 
     private String removeRepetitions(String sentence){
         ArrayList<String> words = new ArrayList<String>(Arrays.asList(sentence.split(" ")));
