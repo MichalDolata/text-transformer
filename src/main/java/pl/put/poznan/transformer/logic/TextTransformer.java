@@ -18,6 +18,16 @@ public class TextTransformer {
         // of course normally it would to something based on transforms
         return text.toUpperCase();
     }
+    
+     /**
+     * This function is used for transformation all letters to upper case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in upper case
+     */
+    static String Upper(String text)
+    {
+	 return text.toUpperCase();
+    }
 
     private String removeRepetitions(String sentence){
         ArrayList<String> words = new ArrayList<String>(Arrays.asList(sentence.split(" ")));
