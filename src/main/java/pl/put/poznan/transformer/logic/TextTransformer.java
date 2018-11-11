@@ -29,6 +29,16 @@ public class TextTransformer {
 	 return text.toUpperCase();
     }
 
+    /**
+     * This function is used for transformation all letters to lower case.
+     * @param text - Input string that will be changed
+     * @return string where all letters in lower case
+     */
+    static String Lower(String text)
+    {	
+         return text.toLowerCase();
+    }
+
     private String removeRepetitions(String sentence){
         ArrayList<String> words = new ArrayList<String>(Arrays.asList(sentence.split(" ")));
         int number_of_words = words.size();
