@@ -24,7 +24,7 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where all letters in upper case
      */
-    static String Upper(String text)
+    static String upper(String text)
     {
 	 return text.toUpperCase();
     }
@@ -34,7 +34,7 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where all letters in lower case
      */
-    static String Lower(String text)
+    static String lower(String text)
     {	
          return text.toLowerCase();
     }
@@ -44,7 +44,7 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where onle the first letter in each sentence in upper case
      */
-    static String Capital(String text)
+    static String capital(String text)
     {
           char lit[] = text.toCharArray();
 	  boolean cap = true;
