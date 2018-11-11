@@ -38,6 +38,31 @@ public class TextTransformer {
     {	
          return text.toLowerCase();
     }
+	
+    /**
+     * This function is used for transformation onle the first letter in each sentence to upper case.
+     * @param text - Input string that will be changed
+     * @return string where onle the first letter in each sentence in upper case
+     */
+    static String Capital(String text)
+    {
+          char lit[] = text.toCharArray();
+	  boolean cap = true;
+	  for (int i = 0; i < text.length(); i++)
+	  {
+	        if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
+		{
+		      cap = true;
+		}
+		else if ((cap)&&(lit[i] != ' '))
+		{
+			if((lit[i] >= 97) && (lit[i] <= 122))
+			      lit[i]-=32;
+			cap = false;
+		}
+	   }
+	   return String.valueOf(lit);
+    }
 
     private String removeRepetitions(String sentence){
         ArrayList<String> words = new ArrayList<String>(Arrays.asList(sentence.split(" ")));
