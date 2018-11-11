@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * This is just an example to show that the logic should be outside the REST service.
+ * This function is used to remove repeating words.
+ * @param text - Input string that will be changed
+ * @return string where all neighboring repetitions are removed
  */
 public class TextTransformer {
 
