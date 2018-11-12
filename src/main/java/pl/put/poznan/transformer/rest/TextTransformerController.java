@@ -3,6 +3,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 import pl.put.poznan.transformer.logic.TextTransformer;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import java.lang.String;
 
 import java.util.Arrays;
 
@@ -14,32 +17,38 @@ public class TextTransformerController {
     private static final Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
+    public ResponseEntity<String> get(@PathVariable String text,
+                              @RequestParam(value="transforms", defaultValue="upper,latex") String[] transforms) {
 
         // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug("Input: " + text);
+        logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
-        return transformer.transform(text);
+        try {
+            return ResponseEntity.ok(transformer.transform(text));
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String text,
+    public ResponseEntity<String> post(@PathVariable String text,
                       @RequestBody String[] transforms) {
 
         // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug("Input: " + text);
+        logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
-        return transformer.transform(text);
+        try {
+            return ResponseEntity.ok(transformer.transform(text));
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
-
-
 
 }
 

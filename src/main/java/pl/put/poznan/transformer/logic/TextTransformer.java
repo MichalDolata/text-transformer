@@ -1,12 +1,13 @@
 package pl.put.poznan.transformer.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import javax.validation.constraints.Null;
 import java.util.*;
 
-/**
- * This is main class which will handle all transformations
- */
+
 public class TextTransformer {
+    private static final Logger logger = LoggerFactory.getLogger(TextTransformer.class);
 
     private final String[] transforms;
 
@@ -14,9 +15,43 @@ public class TextTransformer {
         this.transforms = transforms;
     }
 
+    /**
+     * This function prefroms transformations given in constructor on given text
+     * @param text - input string
+     * @return input string after transformations
+     */
     public String transform(String text) {
-        // of course normally it would to something based on transforms
-        return text.toUpperCase();
+        for (String transform: this.transforms) {
+            logger.debug("Current: " + transform.toLowerCase() + ": " + text);
+            switch (transform.toLowerCase()) {
+                case "upper":
+                    text = this.upper(text);
+                    break;
+                case "lower":
+                    text = this.lower(text);
+                    break;
+                case "capital":
+                    text = this.capital(text);
+                    break;
+                case "removerepetitions":
+                    text = this.removeRepetitions(text);
+                    break;
+                case "latex":
+                    text = this.transformLatext(text);
+                    break;
+                case "expand":
+                    text = this.transformAbbreviationToWords(text);
+                    break;
+                case "abbreviate":
+                    text = this.transformWordsToAbbreviation(text);
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+            }
+            logger.debug("Result: " + text);
+        }
+
+        return text;
     }
     
     /**
@@ -44,17 +79,19 @@ public class TextTransformer {
      */
     private String capital(String text){
     	char lit[] = text.toCharArray();
-	boolean cap = true;
-	for (int i = 0; i < text.length(); i++){
-		if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!')){
-		      cap = true;
-		}else if ((cap)&&(lit[i] != ' ')){
-			if((lit[i] >= 97) && (lit[i] <= 122))
-			      lit[i]-=32;
-			cap = false;
-		}
-	}
-	return String.valueOf(lit);
+
+        boolean cap = true;
+        for (int i = 0; i < text.length(); i++){
+            if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!')){
+                cap = true;
+            }else if ((cap)&&(lit[i] != ' ')){
+                if((lit[i] >= 97) && (lit[i] <= 122))
+                    lit[i]-=32;
+                cap = false;
+            }
+        }
+
+        return String.valueOf(lit);
     }
 
     /**
@@ -183,11 +220,4 @@ public class TextTransformer {
     {
         return replaceWithMap(str, WORDS_TO_ABBREVIATION_MAP);
     }
-
-
-
-
-
-
-
 }
