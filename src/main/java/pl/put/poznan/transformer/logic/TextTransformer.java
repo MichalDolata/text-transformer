@@ -1,15 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
-
 import javax.validation.constraints.Null;
 import java.util.*;
 
-/**
- * This function is used to remove repeating words.
- *
- * @param text - Input string that will be changed
- * @return string where all neighboring repetitions are removed
- */
 public class TextTransformer {
 
     private final String[] transforms;
@@ -61,6 +54,12 @@ public class TextTransformer {
 	return String.valueOf(lit);
     }
 
+    /**
+     * This function is used to remove repeating words.
+     *
+     * @param text - Input string that will be changed
+     * @return string where all neighboring repetitions are removed
+     */
     private String removeRepetitions(String sentence) {
         ArrayList<String> words = new ArrayList<String>(Arrays.asList(sentence.split(" ")));
         int number_of_words = words.size();
