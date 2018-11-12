@@ -45,6 +45,8 @@ public class TextTransformer {
                 case "abbreviate":
                     text = this.transformWordsToAbbreviation(text);
                     break;
+                default:
+                    throw new IllegalArgumentException();
             }
             logger.debug("Result: " + text);
         }
