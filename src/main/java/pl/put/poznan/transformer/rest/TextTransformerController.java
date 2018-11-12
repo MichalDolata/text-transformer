@@ -27,7 +27,7 @@ public class TextTransformerController {
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
         try {
-            return transformer.transform(text);
+            return ResponseEntity.ok(transformer.transform(text));
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -44,7 +44,7 @@ public class TextTransformerController {
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
         try {
-            return transformer.transform(text);
+            return ResponseEntity.ok(transformer.transform(text));
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
