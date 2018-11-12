@@ -1,7 +1,8 @@
 package pl.put.poznan.transformer.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
+import javax.validation.constraints.Null;
+import java.util.*;
 
 /**
  * This function is used to remove repeating words.
@@ -87,4 +88,100 @@ public class TextTransformer {
         }
         return String.join(" ", words);
     }
+
+    private String replaceWithMap(String str, Map<String,String> map) {
+        for (Map.Entry<String, String> entry : map.entrySet())
+        {
+            String temp = str.toLowerCase();
+            str = str.replaceAll("\\b"+entry.getKey()+"\\b",entry.getValue());
+        }
+        return str;
+    }
+
+    /**
+     * Map used to replace special LaText characters.
+     */
+    private static final Map<String,String> LATEXT_MAP= Collections.unmodifiableMap(
+            new HashMap<String,String>() {{
+                put("%","\\%");
+                put("$","\\$");
+                put("{","\\{");
+                put("}","\\}");
+                put("_","\\_");
+                put("|","\\textbar");
+                put(">","\\textgreater");
+                put("<","\\textbackslash");
+                put("&","\\&");
+            }});
+
+    /**
+     * Returns text that can be safely used in LaText environment.
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
+    private String transformLatext(String str){
+        return replaceWithMap(str,LATEXT_MAP);
+    }
+
+    /**
+     * Map used to replace abbreviation to long forms.
+     */
+    private static final Map<String,String> ABBREVIATION_TO_WORDS_MAP = Collections.unmodifiableMap(
+      new HashMap<String,String>(){{
+          put("prof.", "profesor");
+          put("Prof.", "Profesor");
+          put("dr", "doktor");
+          put("Dr", "Doktor");
+          put("np.", "na przykład");
+          put("Np.", "Na przykład");
+          put("itd.", "i tym podobne");
+          put("Itd.", "I tym podobne");
+          put("m.in", "między innymi");
+          put("M.in", "Między innymi");
+      }}
+    );
+
+    /**
+     * Transform all abbreviations inside ABBREVIATION_TO_WORDS_MAPS to their longer form
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
+    private String transformAbbreviationToWords(String str)
+    {
+        return replaceWithMap(str, ABBREVIATION_TO_WORDS_MAP);
+    }
+
+    /**
+     * Map used to replace sequence of words to corresponding abbreviation
+     */
+    private static final Map<String,String> WORDS_TO_ABBREVIATION_MAP = Collections.unmodifiableMap(
+            new HashMap<String,String>(){{
+                put("profesor","prof.");
+                put("Profesor","Prof.");
+                put("doktor", "dr");
+                put("Doktor", "Dr");
+                put("na przykład", "np.");
+                put("Na przykład", "Np.");
+                put("i tym podobne", "itd.");
+                put("I tym podobne", "Itd.");
+                put("między innymi", "m.in");
+                put("Między innymi", "M.in");
+            }}
+    );
+
+    /**
+     * Transform some sequence of words that corresponds to element of WORDS_TO_ABBREVIATION_MAPS to abbreviation
+     * @param str  a text to will be transformed
+     * @return     transformed text
+     */
+    private String transformWordsToAbbreviation(String str)
+    {
+        return replaceWithMap(str, WORDS_TO_ABBREVIATION_MAP);
+    }
+
+
+
+
+
+
 }
