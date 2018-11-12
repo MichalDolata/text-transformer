@@ -15,11 +15,11 @@ public class TextTransformerController {
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public String get(@PathVariable String text,
-                              @RequestParam(value="transforms", defaultValue="upper,escape") String[] transforms) {
+                              @RequestParam(value="transforms", defaultValue="upper,latex") String[] transforms) {
 
         // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug("Input: " + text);
+        logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
@@ -31,15 +31,13 @@ public class TextTransformerController {
                       @RequestBody String[] transforms) {
 
         // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug("Input: " + text);
+        logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
         TextTransformer transformer = new TextTransformer(transforms);
         return transformer.transform(text);
     }
-
-
 
 }
 
