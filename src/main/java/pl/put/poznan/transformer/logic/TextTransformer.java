@@ -3,6 +3,9 @@ package pl.put.poznan.transformer.logic;
 import javax.validation.constraints.Null;
 import java.util.*;
 
+/**
+ * This is main class which will handle all transformations
+ */
 public class TextTransformer {
 
     private final String[] transforms;
