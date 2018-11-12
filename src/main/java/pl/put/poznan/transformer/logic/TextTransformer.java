@@ -24,8 +24,7 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where all letters in upper case
      */
-    static String upper(String text)
-    {
+    static String upper(String text){
 	 return text.toUpperCase();
     }
 
@@ -34,8 +33,7 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where all letters in lower case
      */
-    static String lower(String text)
-    {	
+    static String lower(String text){	
          return text.toLowerCase();
     }
 	
@@ -44,18 +42,13 @@ public class TextTransformer {
      * @param text - Input string that will be changed
      * @return string where onle the first letter in each sentence in upper case
      */
-    static String capital(String text)
-    {
+    static String capital(String text){
     	char lit[] = text.toCharArray();
 	boolean cap = true;
-	for (int i = 0; i < text.length(); i++)
-	{
-		if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!'))
-		{
+	for (int i = 0; i < text.length(); i++){
+		if((lit[i] == '.')||(lit[i] == '?')||(lit[i] == '!')){
 		      cap = true;
-		}
-		else if ((cap)&&(lit[i] != ' '))
-		{
+		}else if ((cap)&&(lit[i] != ' ')){
 			if((lit[i] >= 97) && (lit[i] <= 122))
 			      lit[i]-=32;
 			cap = false;
