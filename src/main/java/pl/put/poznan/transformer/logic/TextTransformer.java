@@ -84,11 +84,17 @@ public class TextTransformer {
         return String.join(" ", words);
     }
 
+    /**
+     *  This function replaces all occurrence of words in map keys with map value.
+     * @param str
+     * @param map
+     * @return
+     */
     private String replaceWithMap(String str, Map<String,String> map) {
         for (Map.Entry<String, String> entry : map.entrySet())
         {
             String temp = str.toLowerCase();
-            str = str.replaceAll("\\b"+entry.getKey()+"\\b",entry.getValue());
+            str = str.replaceAll(entry.getKey(),entry.getValue());
         }
         return str;
     }
@@ -98,15 +104,15 @@ public class TextTransformer {
      */
     private static final Map<String,String> LATEXT_MAP= Collections.unmodifiableMap(
             new HashMap<String,String>() {{
-                put("%","\\%");
-                put("$","\\$");
-                put("{","\\{");
-                put("}","\\}");
-                put("_","\\_");
-                put("|","\\textbar");
-                put(">","\\textgreater");
-                put("<","\\textbackslash");
-                put("&","\\&");
+                put("\\%","\\\\%");
+                put("\\$","\\\\"+"\\$");
+                put("\\{","\\\\{");
+                put("\\}","\\\\}");
+                put("_","\\\\_");
+                put("\\|","\\\\textbar");
+                put(">","\\\\textgreater");
+                put("<","\\\\textbackslash");
+                put("\\&","\\\\&");
             }});
 
     /**
@@ -116,24 +122,28 @@ public class TextTransformer {
      */
     private String transformLatext(String str){
         return replaceWithMap(str,LATEXT_MAP);
+
+
     }
 
     /**
      * Map used to replace abbreviation to long forms.
      */
     private static final Map<String,String> ABBREVIATION_TO_WORDS_MAP = Collections.unmodifiableMap(
-      new HashMap<String,String>(){{
-          put("prof.", "profesor");
-          put("Prof.", "Profesor");
-          put("dr", "doktor");
-          put("Dr", "Doktor");
-          put("np.", "na przykład");
-          put("Np.", "Na przykład");
-          put("itd.", "i tym podobne");
-          put("Itd.", "I tym podobne");
-          put("m.in", "między innymi");
-          put("M.in", "Między innymi");
-      }}
+            new HashMap<String,String>(){{
+                put("\\bprof\\b.", "profesor");
+                put("\\bProf\\b.", "Profesor");
+                put("\\bdr\\b", "doktor");
+                put("\\bDr\\b", "Doktor");
+                put("\\bnp\\b\\.", "na przykład");
+                put("\\bNp\\b\\.", "Na przykład");
+                put("\\bitd\\b\\.", "i tym podobne");
+                put("\\bItd\\b\\.", "I tym podobne");
+                put("\\bm\\.in\\b", "między innymi");
+                put("\\bM\\.in\\b", "Między innymi");
+
+
+            }}
     );
 
     /**
@@ -173,6 +183,7 @@ public class TextTransformer {
     {
         return replaceWithMap(str, WORDS_TO_ABBREVIATION_MAP);
     }
+
 
 
 
