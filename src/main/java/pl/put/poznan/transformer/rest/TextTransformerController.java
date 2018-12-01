@@ -25,12 +25,13 @@ public class TextTransformerController {
         logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
+     /*   TextTransformer transformer = new TextTransformer(transforms);
         try {
             return ResponseEntity.ok(transformer.transform(text));
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        }*/
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
@@ -42,12 +43,13 @@ public class TextTransformerController {
         logger.debug("Transformations: " + Arrays.toString(transforms));
 
         // do the transformation, you should run your logic here, below just a silly example
-        TextTransformer transformer = new TextTransformer(transforms);
+        /*TextTransformer transformer = new TextTransformer(transforms);
         try {
             return ResponseEntity.ok(transformer.transform(text));
         } catch (IllegalArgumentException exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        }*/
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }
