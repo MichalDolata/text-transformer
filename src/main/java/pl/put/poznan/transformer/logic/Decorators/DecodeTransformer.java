@@ -21,11 +21,11 @@ public class DecodeTransformer extends Decorator  {
      */
     @Override
     public String transform(String text){
-        logger.debug("UpperTransformer input: "+text);
+        logger.debug("DecodeTransformer input: "+text);
         text = super.transform(text);
         CipherTransformer dt = new CipherTransformer(Cipher.DECRYPT_MODE);
         text = dt.transform(text);
-        logger.debug("UpperTransformer output: "+text);
+        logger.debug("DecodeTransformer output: "+text);
         return text;
     }
 }
