@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
 import java.awt.Font;
-import src.main.org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
