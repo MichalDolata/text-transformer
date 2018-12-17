@@ -3,7 +3,7 @@ package pl.put.poznan.transformer.logic.Decorators;
 import pl.put.poznan.transformer.logic.InverseTransformer;
 
 public class InverseTransformer extends Decorator {
-    public InverseTransformer(TextTransformer decorator){
+    public InverseTransformer(InverseTransformer decorator){
         super(decorator);
     }
     /**
