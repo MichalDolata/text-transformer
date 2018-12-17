@@ -20,8 +20,8 @@ public class TextToAbbrevivationTransformer extends MapTransformer {
                     put("Doktor", "Dr");
                     put("na przykład", "np.");
                     put("Na przykład", "Np.");
-                    put("i tym podobne", "itd.");
-                    put("I tym podobne", "Itd.");
+                    put("i tym podobne", "itp.");
+                    put("I tym podobne", "Itp.");
                     put("między innymi", "m.in");
                     put("Między innymi", "M.in");
                 }}

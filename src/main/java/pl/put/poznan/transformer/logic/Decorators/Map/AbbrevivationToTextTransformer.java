@@ -18,8 +18,8 @@ public class AbbrevivationToTextTransformer extends MapTransformer {
                     put("\\bDr\\b", "Doktor");
                     put("\\bnp\\b\\.", "na przykład");
                     put("\\bNp\\b\\.", "Na przykład");
-                    put("\\bitd\\b\\.", "i tym podobne");
-                    put("\\bItd\\b\\.", "I tym podobne");
+                    put("\\bitp\\b\\.", "i tym podobne");
+                    put("\\bItp\\b\\.", "I tym podobne");
                     put("\\bm\\.in\\b", "między innymi");
                     put("\\bM\\.in\\b", "Między innymi");
                 }}
