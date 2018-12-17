@@ -14,14 +14,14 @@ public class InverseTransformer extends Decorator {
      * @return string with inversed text on chosen position
      */
     @Override
-    public static String transform(String text, int strt, int fnsh){
+    public String transform(String text){
         logger.debug("InverseTransformer input: "+text);
         text = super.transform(text);
         char lit[] = text.toCharArray();
 
         char tmp;
-		    int i = strt;
-		    int j = fnsh;
+		    int i = 0;
+		    int j = text.size();
 		    while(i < j) {
 			    tmp = lit[i];
 			    lit[i] = lit[j];
