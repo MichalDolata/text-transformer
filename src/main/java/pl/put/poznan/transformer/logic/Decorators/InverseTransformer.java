@@ -1,9 +1,9 @@
 package pl.put.poznan.transformer.logic.Decorators;
 
-import pl.put.poznan.transformer.logic.InverseTransformer;
+import pl.put.poznan.transformer.logic.TextTransformer;
 
 public class InverseTransformer extends Decorator {
-    public InverseTransformer(InverseTransformer decorator){
+    public InverseTransformer(TextTransformer decorator){
         super(decorator);
     }
     /**
