@@ -1,11 +1,11 @@
 package pl.put.poznan.transformer.logic.Decorators.Map;
 
-import pl.put.poznan.transformer.logic.Decorators.CapitalizeTransformer;
 import pl.put.poznan.transformer.logic.TextTransformer;
+import pl.put.poznan.transformer.logic.Decorators.Decorator;
 
 import java.util.Map;
 
-class MapTransformer extends CapitalizeTransformer {
+class MapTransformer extends Decorator {
     /**
      * Map used to replace abbreviation to long forms.
      */
