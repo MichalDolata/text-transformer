@@ -173,7 +173,6 @@ public class GUI {
 		lblOther.setBounds(731, 182, 177, 15);
 		frmTextTransformer.getContentPane().add(lblOther);
 		lblOther.setFont(new Font("DialogInput", Font.BOLD, 20));
-		frmTextTransformer.getContentPane().setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{txtrTextField, panel, btnUpper, btnLower, btnCapital, label, panel_1, btnFull, btnAbbr, lblAbbreviation, lblTextTransformer}));
 		frmTextTransformer.setVisible(true);
 	}
 	
