@@ -32,7 +32,7 @@ public class GUI {
 	private JButton btnInverse;
 	private JLabel lblOther;
 
-	public static void main(String[] args) {
+	public static void other(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
