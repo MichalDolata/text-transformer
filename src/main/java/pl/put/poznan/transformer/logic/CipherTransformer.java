@@ -10,22 +10,31 @@ import java.security.InvalidKeyException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.BadPaddingException;
-
+import javax.xml.bind.DatatypeConverter;
+import java.nio.charset.StandardCharsets;
 
 public class CipherTransformer {
     private Key key;
     private Cipher cipher;
     private static final String algorithm = "Blowfish";
+    private int mode;
 
     public CipherTransformer(int mode){
         generateKey();
         generateCipherInstance();
         initCipherMode(mode);
+        this.mode = mode;
     }
 
     public String transform(String text){
-        byte[] plainText = text.getBytes();
+        byte[] plainText;
         byte[] cipherText;
+
+        if(mode == Cipher.ENCRYPT_MODE) {
+            plainText = text.getBytes(StandardCharsets.UTF_8);
+        } else {
+            plainText = DatatypeConverter.parseBase64Binary(text);
+        }
 
         try {
             cipherText = this.cipher.doFinal(plainText);
@@ -37,7 +46,14 @@ public class CipherTransformer {
             return("error");
         }
 
-        String result = new String(cipherText);
+        String result;
+
+        if(mode == Cipher.ENCRYPT_MODE) {
+            result = DatatypeConverter.printBase64Binary(cipherText);
+        } else {
+            result = new String(cipherText, StandardCharsets.UTF_8);
+        }
+
         return(result);
     }
 
@@ -61,7 +77,7 @@ public class CipherTransformer {
 
     private void generateKey(){
         String str_key = "java is the best";
-        byte[] key_byte = str_key.getBytes();
+        byte[] key_byte = DatatypeConverter.parseBase64Binary(str_key);
         SecretKey key = new SecretKeySpec(key_byte, this.algorithm);
         this.key = key;
     }
