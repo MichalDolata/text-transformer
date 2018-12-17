@@ -2,6 +2,9 @@ package pl.put.poznan.transformer.logic.Decorators;
 
 import pl.put.poznan.transformer.logic.TextTransformer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class InverseTransformer extends Decorator {
     public InverseTransformer(TextTransformer decorator){
         super(decorator);
