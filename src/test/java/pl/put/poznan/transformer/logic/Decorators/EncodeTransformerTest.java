@@ -38,4 +38,18 @@ public class EncodeTransformerTest {
     String encoded = et.transform("bałwan");
     assertEquals("bałwan", dt.transform(encoded));
   }
+
+  @Test
+  public void testCorrectlyEncodeEmpty() {
+    String encoded = et.transform("");
+    assertEquals("", dt.transform(encoded));
+  }
+
+  @Test
+  public void testCorrectlyEncodeLongWord() {
+    String encoded = et.transform("bałwanalasdaasdgadasfadsfasdfdsaasfsdfasdfadsfasdf");
+    assertEquals("bałwanalasdaasdgadasfadsfasdfdsaasfsdfasdfadsfasdf", dt.transform(encoded));
+  }
+
+
 }

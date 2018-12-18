@@ -1,3 +1,11 @@
+import pl.put.poznan.transformer.logic.BaseTransformer;
+import pl.put.poznan.transformer.logic.Decorators.CapitalizeTransformer;
+import pl.put.poznan.transformer.logic.Decorators.InverseTransformer;
+import pl.put.poznan.transformer.logic.Decorators.LowerTransformer;
+import pl.put.poznan.transformer.logic.Decorators.Map.AbbrevivationToTextTransformer;
+import pl.put.poznan.transformer.logic.Decorators.Map.TextToAbbrevivationTransformer;
+import pl.put.poznan.transformer.logic.Decorators.UpperTransformer;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -64,7 +72,9 @@ public class GUI {
 		btnUpper = new JButton("UPPER");
 		btnUpper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(UpperTransformer(txtrTextField.getText()));
+				BaseTransformer bt = new BaseTransformer();
+				UpperTransformer transformer = new UpperTransformer(bt);
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnUpper.setToolTipText("Change every letter of sentences to big size");
@@ -74,7 +84,9 @@ public class GUI {
 		btnLower = new JButton("lower");
 		btnLower.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(LowerTransformer(txtrTextField.getText()));
+				BaseTransformer bt = new BaseTransformer();
+				LowerTransformer transformer = new LowerTransformer(bt);
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnLower.setToolTipText("Change every letter of sentences to small size");
@@ -84,7 +96,10 @@ public class GUI {
 		btnCapital = new JButton("Capital");
 		btnCapital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(CapitalizeTransformer(txtrTextField.getText()));
+				BaseTransformer bt = new BaseTransformer();
+				CapitalizeTransformer transformer = new CapitalizeTransformer(bt);
+
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnCapital.setToolTipText("Change every first letter of sentences to big size");
@@ -105,7 +120,10 @@ public class GUI {
 		btnFull = new JButton("No Abbreviation");
 		btnFull.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(AbbrevivationToTextTransformer(txtrTextField.getText()));
+				BaseTransformer bt = new BaseTransformer();
+				AbbrevivationToTextTransformer transformer = new AbbrevivationToTextTransformer(bt);
+
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnFull.setToolTipText("Expands abbreviation (prof. -> profesor)");
@@ -115,7 +133,9 @@ public class GUI {
 		btnAbbr = new JButton("Abbr.");
 		btnAbbr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(TextToAbbrevivationTransformer(txtrTextField.getText()));
+				BaseTransformer bt = new BaseTransformer();
+				TextToAbbrevivationTransformer transformer = new TextToAbbrevivationTransformer(bt);
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnAbbr.setToolTipText("Сuts words to abbreviation (profesor -> prof. )");
@@ -161,7 +181,10 @@ public class GUI {
 		btnInverse = new JButton("Inverse");
 		btnInverse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(InverseTransformer(txtrTextField.getText(), txtrTextField.getSelectionStart(), txtrTextField.getSelectionEnd()-1));
+				BaseTransformer bt = new BaseTransformer();
+				InverseTransformer transformer = new InverseTransformer(bt);
+
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnInverse.setToolTipText("Inverts chosen text");
