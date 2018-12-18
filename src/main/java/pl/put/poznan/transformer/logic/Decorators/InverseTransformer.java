@@ -12,9 +12,6 @@ public class InverseTransformer extends Decorator {
     /**
      * This function is used for inversing text on chosen position.
      * @param text - Input string that will be changed
-     * @param strt - Start position
-     * @param fnsh - End position
-     * @return string with inversed text on chosen position
      */
     @Override
     public String transform(String text){
@@ -35,6 +32,12 @@ public class InverseTransformer extends Decorator {
         return text;
 
     }
+
+    /**
+     *  This function inverse word.
+     * @param text Input String
+     * @return reversed string
+     */
     private String inverse(String text){
         char lit[] = text.toCharArray();
         char tmp;

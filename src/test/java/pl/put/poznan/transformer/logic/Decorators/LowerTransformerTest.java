@@ -26,4 +26,19 @@ public class LowerTransformerTest {
   public void testTranformSentenceToLowerCase() {
     assertEquals(lt.transform("THAT IS FULL SENTENCE."), "that is full sentence.");
   }
+  @Test
+  public void testTranformEmpty() {
+    assertEquals(lt.transform(""), "");
+  }
+
+  @Test
+  public void testTranformSentenceFromLowerCase() {
+    assertEquals(lt.transform("that is full sentence."), "that is full sentence.");
+  }
+  @Test
+  public void testTranformCharToLowerCase() {
+    assertEquals(lt.transform("T"), "t");
+  }
+
+
 }
