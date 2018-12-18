@@ -74,7 +74,7 @@ public class GUI {
 			public void actionPerformed(ActionEvent e) {
 				BaseTransformer bt = new BaseTransformer();
 				UpperTransformer transformer = new UpperTransformer(bt);
-				txtrTextField.setText(transformer.transform(txtrTextField.getText())));
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnUpper.setToolTipText("Change every letter of sentences to big size");
