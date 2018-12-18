@@ -39,7 +39,7 @@ public class CapitalizeTransformerTest {
 
   @Test
   public void testCapitalizeUpper() {
-    assertEquals(ct.transform("ALA MA KOTA. KOTA MA ALE."), "ALA MA KOTA. KOTA MA ALE");
+    assertEquals(ct.transform("ALA MA KOTA. KOTA MA ALE."), "ALA MA KOTA. KOTA MA ALE.");
   }
 
 
