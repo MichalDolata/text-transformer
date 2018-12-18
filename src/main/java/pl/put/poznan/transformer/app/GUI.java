@@ -184,7 +184,7 @@ public class GUI {
 				BaseTransformer bt = new BaseTransformer();
 				InverseTransformer transformer = new InverseTransformer(bt);
 
-				txtrTextField.setText(transformer.transform(txtrTextField.getText(), txtrTextField.getSelectionStart(), txtrTextField.getSelectionEnd()-1));
+				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
 			}
 		});
 		btnInverse.setToolTipText("Inverts chosen text");
