@@ -2,13 +2,10 @@ package pl.put.poznan.transformer.logic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pl.put.poznan.transformer.logic.Decorators.CapitalizeTransformer;
-import pl.put.poznan.transformer.logic.Decorators.Decorator;
+import pl.put.poznan.transformer.logic.Decorators.*;
 import pl.put.poznan.transformer.logic.Decorators.Map.AbbrevivationToTextTransformer;
 import pl.put.poznan.transformer.logic.Decorators.Map.LatexTransformer;
 import pl.put.poznan.transformer.logic.Decorators.Map.TextToAbbrevivationTransformer;
-import pl.put.poznan.transformer.logic.Decorators.RepetitionTransformer;
-import pl.put.poznan.transformer.logic.Decorators.UpperTransformer;
 //import javax.validation.constraints.Null;
 //import java.util.*;
 
@@ -37,6 +34,18 @@ public interface TextTransformer {
                 break;
             case "texttoabbrevivation":
                 res = new TextToAbbrevivationTransformer(tt);
+                break;
+            case "decode":
+                res = new DecodeTransformer(tt);
+                break;
+            case "encode":
+                res = new EncodeTransformer(tt);
+                break;
+            case "inverse":
+                res = new InverseTransformer(tt);
+                break;
+            case "lower":
+                res = new LowerTransformer(tt);
                 break;
         }
         return res;
