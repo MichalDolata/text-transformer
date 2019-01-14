@@ -2,12 +2,14 @@ package pl.put.poznan.transformer.logic;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import javax.crypto.Cipher;
 import pl.put.poznan.transformer.logic.Decorators.*;
 import pl.put.poznan.transformer.logic.Decorators.Map.AbbrevivationToTextTransformer;
 import pl.put.poznan.transformer.logic.Decorators.Map.LatexTransformer;
 import pl.put.poznan.transformer.logic.Decorators.Map.TextToAbbrevivationTransformer;
 //import javax.validation.constraints.Null;
 //import java.util.*;
+import pl.put.poznan.transformer.logic.CipherTransformer;
 
 
 public interface TextTransformer {
@@ -16,6 +18,7 @@ public interface TextTransformer {
 
     static Decorator getTransformerByName(String name, TextTransformer tt){
         Decorator res = null;
+        CipherTransformer dt = null;
         switch (name){
             case "latex":
                 res = new LatexTransformer(tt);
@@ -36,10 +39,12 @@ public interface TextTransformer {
                 res = new TextToAbbrevivationTransformer(tt);
                 break;
             case "decode":
-                res = new DecodeTransformer(tt);
+                dt = new CipherTransformer(Cipher.DECRYPT_MODE);
+                res = new DecodeTransformer(tt, dt);
                 break;
             case "encode":
-                res = new EncodeTransformer(tt);
+                dt = new CipherTransformer(Cipher.ENCRYPT_MODE);
+                res = new EncodeTransformer(tt, dt);
                 break;
             case "inverse":
                 res = new InverseTransformer(tt);
