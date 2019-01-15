@@ -22,6 +22,7 @@ public class InverseTransformer extends Decorator {
         char lit[] = text.toCharArray();
         char tmp;
         int i = 0;
+
         int j = text.length()-1;
         while(i < j) {
             tmp = lit[i];
