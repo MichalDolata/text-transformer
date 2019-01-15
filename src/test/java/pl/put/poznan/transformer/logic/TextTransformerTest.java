@@ -29,6 +29,13 @@ public class TextTransformerTest {
 
     assertEquals("lanigro", new InverseTransformer(lowerTransformerMocked).transform("ORGINAL"));
   }
+  @Test
+  public void testInverseLoweredEvenSize() {
+    LowerTransformer lowerTransformerMocked = mock(LowerTransformer.class);
+    when(lowerTransformerMocked.transform("ABCD")).thenReturn("abcd");
+
+    assertEquals("dcba", new InverseTransformer(lowerTransformerMocked).transform("ABCD"));
+  }
 
   @Test
   public void testInverseUppered() {
