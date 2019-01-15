@@ -1,23 +1,18 @@
-import pl.put.poznan.transformer.logic.BaseTransformer;
-import pl.put.poznan.transformer.logic.Decorators.CapitalizeTransformer;
-import pl.put.poznan.transformer.logic.Decorators.InverseTransformer;
-import pl.put.poznan.transformer.logic.Decorators.LowerTransformer;
-import pl.put.poznan.transformer.logic.Decorators.Map.AbbrevivationToTextTransformer;
-import pl.put.poznan.transformer.logic.Decorators.Map.TextToAbbrevivationTransformer;
-import pl.put.poznan.transformer.logic.Decorators.UpperTransformer;
-
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Component;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.UIManager;
 
 public class GUI {
 
@@ -39,7 +34,7 @@ public class GUI {
 	private JButton btnInverse;
 	private JLabel lblOther;
 
-	public static void other() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -72,9 +67,7 @@ public class GUI {
 		btnUpper = new JButton("UPPER");
 		btnUpper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				UpperTransformer transformer = new UpperTransformer(bt);
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("upper");
 			}
 		});
 		btnUpper.setToolTipText("Change every letter of sentences to big size");
@@ -84,9 +77,7 @@ public class GUI {
 		btnLower = new JButton("lower");
 		btnLower.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				LowerTransformer transformer = new LowerTransformer(bt);
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("lower");
 			}
 		});
 		btnLower.setToolTipText("Change every letter of sentences to small size");
@@ -96,10 +87,7 @@ public class GUI {
 		btnCapital = new JButton("Capital");
 		btnCapital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				CapitalizeTransformer transformer = new CapitalizeTransformer(bt);
-
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("capitalize");
 			}
 		});
 		btnCapital.setToolTipText("Change every first letter of sentences to big size");
@@ -120,10 +108,7 @@ public class GUI {
 		btnFull = new JButton("No Abbreviation");
 		btnFull.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				AbbrevivationToTextTransformer transformer = new AbbrevivationToTextTransformer(bt);
-
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("abbrevivationtotext");
 			}
 		});
 		btnFull.setToolTipText("Expands abbreviation (prof. -> profesor)");
@@ -133,9 +118,7 @@ public class GUI {
 		btnAbbr = new JButton("Abbr.");
 		btnAbbr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				TextToAbbrevivationTransformer transformer = new TextToAbbrevivationTransformer(bt);
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("texttoabbrevivation");
 			}
 		});
 		btnAbbr.setToolTipText("Сuts words to abbreviation (profesor -> prof. )");
@@ -161,7 +144,7 @@ public class GUI {
 		btnToLatex = new JButton("To Latex");
 		btnToLatex.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(LatexTransformer(txtrTextField.getText()));
+				choose("latex");
 			}
 		});
 		btnToLatex.setToolTipText("Transform text to LateX format");
@@ -171,7 +154,7 @@ public class GUI {
 		btnNoRepeats = new JButton("No Repeats");
 		btnNoRepeats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//txtrTextField.setText(RepetitionTransformer(txtrTextField.getText()));
+				choose("repetition");
 			}
 		});
 		btnNoRepeats.setToolTipText("Delete all repeats");
@@ -181,10 +164,7 @@ public class GUI {
 		btnInverse = new JButton("Inverse");
 		btnInverse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				BaseTransformer bt = new BaseTransformer();
-				InverseTransformer transformer = new InverseTransformer(bt);
-
-				txtrTextField.setText(transformer.transform(txtrTextField.getText()));
+				choose("inverse");
 			}
 		});
 		btnInverse.setToolTipText("Inverts chosen text");
@@ -196,6 +176,77 @@ public class GUI {
 		frmTextTransformer.getContentPane().add(lblOther);
 		lblOther.setFont(new Font("DialogInput", Font.BOLD, 20));
 		frmTextTransformer.setVisible(true);
+	}
+	
+	public String Get(String txt, String transforms) {
+		
+		String text = txt.replace("\\",",,,,,,,,,,,");
+		text = text.replace("?","%3F");
+		//text = text.replace("/","%2F");
+		
+		String query = "http://localhost:8080/"+text.replace(" ", "%20")+"?transforms="+transforms+"&";
+		
+		StringBuilder sb = new StringBuilder();
+		
+		HttpURLConnection con = null;
+		
+		try {
+			con = (HttpURLConnection) new URL(query).openConnection();
+			
+			con.setRequestMethod("GET");
+			con.setUseCaches(false);
+			con.setConnectTimeout(250);
+			con.setReadTimeout(250);
+			
+			con.connect();
+			
+			
+			if (HttpURLConnection.HTTP_OK == con.getResponseCode() ) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				
+				String line;
+				while ((line = in.readLine()) != null) {
+					sb.append(line);
+				}
+				text = sb.toString();
+				
+			}else {
+				System.out.println("fail: " + con.getResponseCode() + ", " + con.getResponseMessage());
+				sb.append(txt);
+			}
+		}catch (Throwable cause) {
+			cause.printStackTrace();
+		}finally {
+			if(con != null)
+				con.disconnect();
+		}
+		return text.replace(",,,,,,,,,,,","\\");
+	}
+	public String lines(String txt, String transforms) {
+		String[] lines = txt.split(System.getProperty("line.separator"));
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < lines.length - 1; i++)
+		{
+			sb.append(Get(lines[i], transforms));
+			sb.append("\n");
+		}
+		sb.append(Get(lines[lines.length - 1], transforms));
+		
+		return sb.toString();
+	}
+	
+	public void choose(String transforms) {
+		int strt = txtrTextField.getSelectionStart();
+		int fnsh = txtrTextField.getSelectionEnd();
+		String txt = txtrTextField.getSelectedText();
+		if(txt != null)
+		{
+			txtrTextField.setSelectionStart(strt);
+			txtrTextField.setSelectionEnd(fnsh);
+			txtrTextField.replaceSelection(lines(txtrTextField.getSelectedText(), transforms));
+		}
+		else
+			txtrTextField.setText(lines(txtrTextField.getText(), transforms));
 	}
 	
 }
